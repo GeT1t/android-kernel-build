@@ -208,6 +208,6 @@ KMI_SYMBOL_LIST_STRICT_MODE=0 LTO=full BUILD_KERNEL=1 ./build_slider.sh -j8
 > 磁盘工具 --> 右上角 "+" 号(新建) --> 格式选择区分大小 --> 在创建的磁盘路径中编译代码
 
 # 参考文章
-https://blog.seeflower.dev/archives/174/
-https://www.r4ve1.com/p/brief-android-kernel-exploitation/
-https://github.com/abcz316/rwProcMem33
+https://blog.seeflower.dev/archives/174/  
+https://www.r4ve1.com/p/brief-android-kernel-exploitation/  
+https://github.com/abcz316/rwProcMem33  
