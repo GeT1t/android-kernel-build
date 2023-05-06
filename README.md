@@ -13,9 +13,10 @@
 ```bash
 # install repo
 mkdir ~/bin
-curl http://gerrit.googlesource.com/git-repo/repo > ~/bin/repo
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
-echo "PATH=~/bin/repo:$PATH"
+echo "PATH=~/bin/repo:\$PATH" >> ~/.bashrc
+source ~/.bashrc
 sudo ln -s /usr/bin/python3  /usr/bin/python
 
 # install essential build environment
