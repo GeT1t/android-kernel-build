@@ -138,8 +138,8 @@ BUILD_BOOT_IMG=1 MKBOOTIMG_PATH=../mkbootimg/mkbootimg.py VENDOR_RAMDISK_BINARY=
 
 #### Pixel6  
 Pixel6 ``boot.img`` 文件格式已经和 Pixel3 不同，打包 ``boot.img`` 的方式也不相同。可以通过上面解包的方式确定你需要刷机的 ``boot.img`` 格式版本，并根据不同的版本传入不同的参数进行打包。
-> Pixel6: BOOT_IMAGE_HEADER_VERSION=4
-> Pixel3: BOOT_IMAGE_HEADER_VERSION=2
+> Pixel6: BOOT_IMAGE_HEADER_VERSION=4  
+> Pixel3: BOOT_IMAGE_HEADER_VERSION=2  
 
 
 ```bash
@@ -158,7 +158,10 @@ cd ~/code/mkbootimg
 python unpack_bootimg.py --boot_img ~/images/oriole-sq3a.220705.003/boot.img
 cp out/ramdisk ~/code/android-kernel
 
-SKIP_MRPROPER=1 BUILD_BOOT_IMG=1 KERNEL_BINARY=Image.lz4 VENDOR_RAMDISK_BINARY=ramdisk BOOT_IMAGE_HEADER_VERSION=4 LTO=full BUILD_KERNEL=1 ./build_slider.sh
+BUILD_BOOT_IMG=1 SKIP_VENDOR_BOOT=0 KERNEL_BINARY=Image.lz4 VENDOR_RAMDISK_BINARY=ramdisk BOOT_IMAGE_HEADER_VERSION=4 LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
+
+# or build by default
+LTO=thin BUILD_KERNEL=1 ./build_slider.sh
 ```
 
 ### Patch Kernel
@@ -196,9 +199,9 @@ cp -r ~/code/hwBreakpointProc ~/code/android-kernel/aosp/drivers/hwBreakpointPro
 
 # You need fix build error caused by rwProcMem33
 
-# You need set KMI_SYMBOL_LIST_STRICT_MODE to skip abi check or use build_abi.sh to update abi info. For more information, pls read https://source.android.com/docs/core/architecture/kernel/abi-monitor 
-KMI_SYMBOL_LIST_STRICT_MODE=0 LTO=full BUILD_KERNEL=1 ./build_slider.sh -j8
-
+# You need set KMI_SYMBOL_LIST_STRICT_MODE to skip abi check or use build_abi.sh to update abi info. 
+# For more information, pls read https://source.android.com/docs/core/architecture/kernel/abi-monitor 
+SKIP_MRPROPER=1 BUILD_BOOT_IMG=1 KMI_SYMBOL_LIST_STRICT_MODE=0 SKIP_VENDOR_BOOT=0 KERNEL_BINARY=Image.lz4 VENDOR_RAMDISK_BINARY=ramdisk BOOT_IMAGE_HEADER_VERSION=4 LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
 ```
 
 
